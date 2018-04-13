@@ -16,6 +16,8 @@ defmodule Financex do
     path = [{:python_path, to_char_list(Path.expand("lib/financex"))}]
     {:ok, python} = :python.start(path)
 
-    :python.call(python, :xirr, :compute, [loan_value, installments])
+    irr = :python.call(python, :xirr, :compute, [loan_value, installments])
+    :python.stop(python)
+    irr
   end
 end
