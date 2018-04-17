@@ -13,7 +13,7 @@ defmodule Financex do
 
   """
   def xirr(loan_value, installments, root \\ ".") do
-    path = [{:python_path, to_char_list(Path.expand("#{root}/lib/financex"))}]
+    path = [{:python_path, to_char_list(Path.expand("lib/financex", root))}]
     {:ok, python} = :python.start(path)
 
     irr = :python.call(python, :xirr, :compute, [loan_value, installments])
